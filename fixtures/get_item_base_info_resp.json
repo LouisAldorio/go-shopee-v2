@@ -1,0 +1,69 @@
+{
+  "error": "",
+  "message": "",
+  "warning": "",
+  "request_id": "9744b31e3925849559e63e652623c3cb",
+  "response": {
+      "item_list": [
+          {
+              "item_id": 10311771375,
+              "category_id": 101568,
+              "item_name": "201 Ready-to-Use Word Games for the English Classroom",
+              "description": "Author: Jack UmstatterStimulating, reproducible word games in this spiral-bound book make it funfor students in grades 7-12 to learn and review word origins, vocabulary,spelling, literary devices, authors and their works, and other languageskills. Spiral-bound.",
+              "item_sku": "",
+              "create_time": 1623822892,
+              "update_time": 1629634621,
+              "image": {
+                  "image_url_list": [
+                      "https://cf.shopee.sg/file/b1bd2ad7265d6030cf2c26c2af89f92a"
+                  ],
+                  "image_id_list": [
+                      "1e076dff0699d8e778c06dd6c02df1fe"
+                  ]
+              },
+              "weight": "0.930",
+              "dimension": {
+                  "package_length": 0,
+                  "package_width": 0,
+                  "package_height": 0
+              },
+              "logistic_info": [
+                  {
+                      "logistic_id": 10007,
+                      "logistic_name": "Ninja Van (Home Delivery)",
+                      "enabled": false,
+                      "is_free": false,
+                      "estimated_shipping_fee": 1.49
+                  },
+                  {
+                      "logistic_id": 10014,
+                      "logistic_name": "J&T Express",
+                      "enabled": true,
+                      "is_free": false,
+                      "estimated_shipping_fee": 1.49
+                  },
+                  {
+                      "logistic_id": 18035,
+                      "logistic_name": "SpeedPost Economy",
+                      "enabled": true,
+                      "is_free": false,
+                      "estimated_shipping_fee": 1.49
+                  }
+              ],
+              "pre_order": {
+                  "is_pre_order": false,
+                  "days_to_ship": 2
+              },
+              "condition": "NEW",
+              "size_chart": "",
+              "item_status": "DELETED",
+              "has_model": true,
+              "brand": {
+                  "brand_id": 0,
+                  "original_brand_name": "NoBrand"
+              },
+              "item_dangerous": 0
+          }
+      ]
+  }
+}
