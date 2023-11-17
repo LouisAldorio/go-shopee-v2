@@ -7,6 +7,7 @@ type LogisticsService interface {
 	GetShippingParameter(uint64, string, string) (*GetShippingParameterResponse, error)
 	GetTrackingNumber(uint64, string, []string, string) (*GetTrackingNumberResponse, error)
 	ShipOrder(uint64, ShipOrderRequest, string) (*ShipOrderResponse, error)
+	GetTrackingInfo(sid uint64, ordersn, tok string) (*GetTrackingInfoResponse, error)
 }
 
 type LogisticsServiceOp struct {
@@ -209,5 +210,39 @@ func (s *LogisticsServiceOp) ShipOrder(sid uint64, data ShipOrderRequest, tok st
 		return nil, err
 	}
 	err = s.client.WithShop(sid, tok).Post(path, req, resp)
+	return resp, err
+}
+
+type GetTrackingInfoRequest struct {
+	OrderSN string `url:"order_sn"`
+}
+
+type GetTrackingInfoResponse struct {
+	BaseResponse
+
+	Response GetTrackingInfoResponseData `json:"response"`
+}
+
+type GetTrackingInfoResponseData struct {
+	OrderSN         string         `json:"order_sn"`
+	PackageNumber   string         `json:"package_number"`
+	LogisticsStatus string         `json:"logistics_status"`
+	TrackingInfos   []TrackingInfo `json:"tracking_info"`
+}
+
+type TrackingInfo struct {
+	UpdateTime      int64  `json:"update_time"`
+	Description     string `json:"description"`
+	LogisticsStatus string `json:"logistics_status"`
+}
+
+func (s *LogisticsServiceOp) GetTrackingInfo(sid uint64, ordersn, tok string) (*GetTrackingInfoResponse, error) {
+	path := "/logistics/get_tracking_info"
+	opt := GetTrackingInfoRequest{
+		OrderSN: ordersn,
+	}
+
+	resp := new(GetTrackingInfoResponse)
+	err := s.client.WithShop(sid, tok).Get(path, resp, opt)
 	return resp, err
 }
