@@ -550,7 +550,10 @@ type GetItemListItem struct {
 }
 
 type GetItemListResponseData struct {
-	Items []Item `json:"item"`
+	TotalCount  int    `json:"total_count"`
+	HasNextPage bool   `json:"has_next_page"`
+	NextOffset  int    `json:"next_offset"`
+	Items       []Item `json:"item"`
 }
 
 type GetItemListResponse struct {
