@@ -7,7 +7,8 @@ type ProductService interface {
 	GetAttributes(uint64, uint64, string, string) (*GetAttributesResponse, error)
 	SupportSizeChart(uint64, uint64, string) (*SupportSizeChartResponse, error)
 	UpdateSizeChart(uint64, uint64, string, string) (*UpdateSizeChartResponse, error)
-	GetItemBaseInfo(uint64, []uint64, string) (*GetItemBaseInfoResponse, error)
+	GetItemList(sid uint64, item GetItemListRequest, tok string) (*GetItemListResponse, error)
+	GetItemBaseInfo(sid uint64, itemIDs []uint64, tok string) (*GetItemBaseInfoResponse, error)
 	AddItem(uint64, AddItemRequest, string) (*AddItemResponse, error)
 	DeleteItem(uint64, uint64, string) (*BaseResponse, error)
 	UpdateItem(uint64, UpdateItemRequest, string) (*UpdateItemResponse, error)
@@ -533,6 +534,41 @@ func (s *ProductServiceOp) GetModelList(sid, itemID uint64, tok string) (*GetMod
 
 	resp := new(GetModelListResponse)
 	err := s.client.WithShop(sid, tok).Get(path, resp, opt)
+	return resp, err
+}
+
+type GetItemListRequest struct {
+	Offset     int    `url:"offset"`
+	PageSize   int    `url:"page_size"`
+	ItemStatus string `url:"item_status"`
+}
+
+type GetItemListItem struct {
+	ItemID     uint64 `json:"item_id"`
+	ItemStatus string `json:"item_status"`
+	UpdateTime uint64 `json:"update_time"`
+}
+
+type GetItemListResponseData struct {
+	Items []Item `json:"item"`
+}
+
+type GetItemListResponse struct {
+	BaseResponse
+
+	Response GetItemListResponseData `json:"response"`
+}
+
+func (s *ProductServiceOp) GetItemList(sid uint64, item GetItemListRequest, tok string) (*GetItemListResponse, error) {
+	path := "/product/get_item_list"
+
+	req, err := StructToMap(item)
+	if err != nil {
+		return nil, err
+	}
+
+	resp := new(GetItemListResponse)
+	err = s.client.WithShop(sid, tok).Get(path, resp, req)
 	return resp, err
 }
 
