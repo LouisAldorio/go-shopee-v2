@@ -10,7 +10,7 @@ type PublicServiceOp struct {
 
 type AuthedShop struct {
 	Region     string `json:"region"`
-	ShopId     uint64 `json:"shopid"`
+	ShopId     uint64 `json:"shop_id"`
 	AuthTime   uint64 `json:"auth_time"`
 	ExpireTime uint64 `json:"expire_time"`
 }
