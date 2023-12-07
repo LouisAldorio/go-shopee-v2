@@ -78,12 +78,7 @@ type GetReturnListResponse struct {
 func (s *ReturnServiceOp) GetReturnList(sid uint64, item GetReturnListRequest, tok string) (*GetReturnListResponse, error) {
 	path := "/returns/get_return_list"
 
-	req, err := StructToMap(item)
-	if err != nil {
-		return nil, err
-	}
-
 	resp := new(GetReturnListResponse)
-	err = s.client.WithShop(sid, tok).Get(path, resp, req)
+	err := s.client.WithShop(sid, tok).Get(path, resp, item)
 	return resp, err
 }

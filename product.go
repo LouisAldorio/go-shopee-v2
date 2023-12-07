@@ -565,13 +565,8 @@ type GetItemListResponse struct {
 func (s *ProductServiceOp) GetItemList(sid uint64, item GetItemListRequest, tok string) (*GetItemListResponse, error) {
 	path := "/product/get_item_list"
 
-	req, err := StructToMap(item)
-	if err != nil {
-		return nil, err
-	}
-
 	resp := new(GetItemListResponse)
-	err = s.client.WithShop(sid, tok).Get(path, resp, req)
+	err := s.client.WithShop(sid, tok).Get(path, resp, item)
 	return resp, err
 }
 
