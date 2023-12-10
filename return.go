@@ -9,12 +9,12 @@ type ReturnServiceOp struct {
 }
 
 type GetReturnListRequest struct {
-	Page     int    `url:"page_no"`
-	PageSize int    `url:"page_size"`
-	Status   *string `url:"status"`
+	Page     int     `url:"page_no"`
+	PageSize int     `url:"page_size"`
+	Status   *string `url:"status,omitempty"`
 
-	Start *uint64 `url:"create_time_from"`
-	End   *uint64 `url:"create_time_to"`
+	Start *uint64 `url:"create_time_from,omitempty"`
+	End   *uint64 `url:"create_time_to,omitempty"`
 }
 
 type GetReturnListResponseData struct {
