@@ -80,6 +80,7 @@ type Client struct {
 	Payment   PaymentService
 	Public    PublicService
 	Return    ReturnService
+	Push      PushService
 }
 
 // NewClient returns a new Shopify API client with an already authenticated shopname and
@@ -111,6 +112,7 @@ func NewClient(app App, opts ...Option) *Client {
 	c.Payment = &PaymentServiceOp{client: c}
 	c.Public = &PublicServiceOp{client: c}
 	c.Return = &ReturnServiceOp{client: c}
+	c.Push = &PushServiceOp{client: c}
 
 	// apply any options
 	for _, opt := range opts {
