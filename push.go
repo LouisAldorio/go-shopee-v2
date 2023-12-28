@@ -2,7 +2,7 @@ package goshopee
 
 type PushService interface {
 	GetLostPushMessage() (*GetLostPushMessageResponse, error)
-	ConfirmConsumedLostPushMessage(lastMessageId string) (*BaseResponse, error)
+	ConfirmConsumedLostPushMessage(lastMessageId uint64) (*BaseResponse, error)
 }
 
 type PushServiceOp struct {
@@ -37,7 +37,7 @@ func (s *PushServiceOp) GetLostPushMessage() (*GetLostPushMessageResponse, error
 	return resp, err
 }
 
-func (s *PushServiceOp) ConfirmConsumedLostPushMessage(lastMessageId string) (*BaseResponse, error) {
+func (s *PushServiceOp) ConfirmConsumedLostPushMessage(lastMessageId uint64) (*BaseResponse, error) {
 	path := "/push/confirm_consumed_lost_push_message"
 
 	resp := new(BaseResponse)
