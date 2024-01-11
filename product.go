@@ -606,9 +606,9 @@ func (s *ProductServiceOp) GetItemBaseInfo(sid uint64, itemIDs []uint64, tok str
 }
 
 type SearchItemRequest struct {
-	Offset     int    `url:"offset"`
-	PageSize   int    `url:"page_size"`
-	ItemStatus string `url:"item_status"`
+	Offset   int    `url:"offset"`
+	PageSize int    `url:"page_size"`
+	ItemName string `url:"item_name"`
 }
 
 type SearchItemResponse struct {
