@@ -9,6 +9,7 @@ type ProductService interface {
 	UpdateSizeChart(uint64, uint64, string, string) (*UpdateSizeChartResponse, error)
 	GetItemList(sid uint64, item GetItemListRequest, tok string) (*GetItemListResponse, error)
 	GetItemBaseInfo(sid uint64, itemIDs []uint64, tok string) (*GetItemBaseInfoResponse, error)
+	SearchItem(sid uint64, item SearchItemRequest, tok string) (*SearchItemResponse, error)
 	AddItem(uint64, AddItemRequest, string) (*AddItemResponse, error)
 	DeleteItem(uint64, uint64, string) (*BaseResponse, error)
 	UpdateItem(uint64, UpdateItemRequest, string) (*UpdateItemResponse, error)
@@ -601,6 +602,34 @@ func (s *ProductServiceOp) GetItemBaseInfo(sid uint64, itemIDs []uint64, tok str
 
 	resp := new(GetItemBaseInfoResponse)
 	err := s.client.WithShop(sid, tok).Get(path, resp, opt)
+	return resp, err
+}
+
+type SearchItemRequest struct {
+	Offset     int    `url:"offset"`
+	PageSize   int    `url:"page_size"`
+	ItemStatus string `url:"item_status"`
+}
+
+type SearchItemResponse struct {
+	BaseResponse
+
+	Response SearchItemResponseData `json:"response"`
+}
+
+type SearchItemResponseData struct {
+	TotalCount  int  `json:"total_count"`
+	HasNextPage bool `json:"has_next_page"`
+	NextOffset  int  `json:"next_offset"`
+
+	ItemIDList []uint64 `json:"item_id_list"`
+}
+
+func (s *ProductServiceOp) SearchItem(sid uint64, item SearchItemRequest, tok string) (*SearchItemResponse, error) {
+	path := "/product/search_item"
+
+	resp := new(SearchItemResponse)
+	err := s.client.WithShop(sid, tok).Get(path, resp, item)
 	return resp, err
 }
 
