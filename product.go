@@ -606,7 +606,7 @@ func (s *ProductServiceOp) GetItemBaseInfo(sid uint64, itemIDs []uint64, tok str
 }
 
 type SearchItemRequest struct {
-	Offset   int    `url:"offset"`
+	Offset   string `url:"offset"`
 	PageSize int    `url:"page_size"`
 	ItemName string `url:"item_name"`
 }
@@ -618,9 +618,9 @@ type SearchItemResponse struct {
 }
 
 type SearchItemResponseData struct {
-	TotalCount  int  `json:"total_count"`
-	HasNextPage bool `json:"has_next_page"`
-	NextOffset  int  `json:"next_offset"`
+	TotalCount  int    `json:"total_count"`
+	HasNextPage bool   `json:"has_next_page"`
+	NextOffset  string `json:"next_offset"`
 
 	ItemIDList []uint64 `json:"item_id_list"`
 }
